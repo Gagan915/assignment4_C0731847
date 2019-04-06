@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using System.Text.RegularExpressions;
 namespace assignment4_C0731847
 {
 
@@ -15,7 +16,8 @@ class Program
         {
             Program p = new Program();
             p.Beowulf = new ArrayList();
-            p.Wordfinder();
+           
+            p.Wordskipper();
             Console.ReadLine();
         }
         public void Run()
@@ -71,11 +73,12 @@ class Program
             int wordCount = 0, index = 0;
             while (index < text.Length)
             {
-                // check if current char is part of a word
+                // check whether current char is part of a word
+                
                 while (index < text.Length && !char.IsWhiteSpace(text[index]))
                     index++;
                 wordCount++;
-                // skip whitespace until next word
+                // skip whitespace until next word come
                 while (index < text.Length && char.IsWhiteSpace(text[index]))
                     index++;
             }
@@ -93,5 +96,28 @@ class Program
             }
             Console.WriteLine(f);
         }
-    }//
+        public void Wordskipper()
+        {
+            int f = 0;
+            int m = 0;
+            int n = 0;
+            foreach (var line in File.ReadAllLines("U:/Users/731847/Assignment#4/Beowulf.txt"))
+            {
+                if (line.Contains("fare"))
+                {
+                    f++;
+                }
+            }
+            foreach (var line in File.ReadAllLines("U:/Users/731847/Assignment#4/Beowulf.txt"))
+            {
+                if (line.Contains("war") && line.Contains("fare"))
+                {
+                    m++;
+                }
+            }
+            n = f - m;
+            Console.WriteLine(n);
+        }
+    }
+
 }
