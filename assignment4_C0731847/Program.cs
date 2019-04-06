@@ -11,13 +11,13 @@ namespace assignment4_C0731847
 
 class Program
     {
+        //c0731847
         ArrayList Beowulf;
         static void Main(string[] args)
         {
             Program p = new Program();
             p.Beowulf = new ArrayList();
-           
-            p.Wordskipper();
+            p.Letters();
             Console.ReadLine();
         }
         public void Run()
@@ -73,12 +73,11 @@ class Program
             int wordCount = 0, index = 0;
             while (index < text.Length)
             {
-                // check whether current char is part of a word
-                
+                // check if current char is part of a word
                 while (index < text.Length && !char.IsWhiteSpace(text[index]))
                     index++;
                 wordCount++;
-                // skip whitespace until next word come
+                // skip whitespace until next word
                 while (index < text.Length && char.IsWhiteSpace(text[index]))
                     index++;
             }
@@ -89,35 +88,51 @@ class Program
             int f = 0;
             foreach (var line in File.ReadAllLines("U:/Users/731847/Assignment#4/Beowulf.txt"))
             {
+                f++;
                 if (line.Contains("sea") && line.Contains("fare"))
                 {
-                    f++;
+                    Console.WriteLine(f);
                 }
             }
-            Console.WriteLine(f);
         }
         public void Wordskipper()
         {
             int f = 0;
-            int m = 0;
-            int n = 0;
             foreach (var line in File.ReadAllLines("U:/Users/731847/Assignment#4/Beowulf.txt"))
             {
-                if (line.Contains("fare"))
+                f++;
+                if (line.Contains("fare") && (!line.Contains("war")))
                 {
-                    f++;
+                    Console.WriteLine(f);
                 }
             }
-            foreach (var line in File.ReadAllLines("U:/Users/731847/Assignment#4/Beowulf.txt"))
+        }
+        public void Letters()
+        {
+            StreamReader reader = new StreamReader("U:/Users/731847/Assignment#4/Beowulf.txt");
+            string script = reader.ReadToEnd();
+            // to find number of letters
+            int numberOfLetters = 0;
+            foreach (char letter in script)
             {
-                if (line.Contains("war") && line.Contains("fare"))
-                {
-                    m++;
-                }
+                numberOfLetters++;
             }
-            n = f - m;
-            Console.WriteLine(n);
+            var text = script.Trim();
+            int wordCount = 0, index = 0;
+            // to find number of words
+            while (index < text.Length)
+            {
+                //  to check whether current char is part of a word
+                while (index < text.Length && !char.IsWhiteSpace(text[index]))
+                    index++;
+                wordCount++;
+                // skip whitespace until next word comes
+                while (index < text.Length && char.IsWhiteSpace(text[index]))
+                    index++;
+            }
+            //find average
+            float avrg = numberOfLetters / wordCount;
+            Console.WriteLine(avrg);
         }
     }
-
 }
